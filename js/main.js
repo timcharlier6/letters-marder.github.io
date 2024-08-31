@@ -31,8 +31,9 @@ Tout se ralentit au rythme de leur croissance...                         \n
     subCounter++;
     counter++;
     if (counter === string.length) {
+      console.log("End of string" + intervalId);
       counter = 0;
       subCounter = 0;
     }
-  }, 2000);
+  }, 200);
 });
