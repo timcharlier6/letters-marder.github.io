@@ -8,17 +8,21 @@ html {
   height: 100%;
   width: 100vw;
   overflow: hidden;
-  font-family: "Calibri", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background-color: transparent;
 }
 
-ul,
-li,
-a {
-  list-style-type: none;
-  display: inline;
+#p {
+  text-wrap: wrap;
+  word-wrap: normal;
+  line-height: 1.5;
 }
 
-a:hover {
-  text-decoration: underline;
-  opacity: 0.8;
+main {
+  margin: 40vh 10vw;
+}
+
+main,
+p {
+  background-color: transparent;
 }

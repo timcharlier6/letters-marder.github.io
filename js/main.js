@@ -1,6 +1,6 @@
 $(document).ready(function () {
   console.log("Hello from main.js");
-  const $main = $("main");
+  const $p = $("#p");
   let string = `Cela, aussi, est un mode de mouvement de la plante: voyager sur les flux d’air ou sur les ailes d’une abeille.\n
 Cherchant un refuge, nous fuyons les éléments, alors que les plantes s'exposent à l'air, à la terre et à l'humidité.\n
 Comme les feuilles des plantes, notre peau détecte l'humidité et la température, les gradients de lumière et les vibrations.\n
@@ -19,22 +19,24 @@ Nous, ainsi que tout ce qui vit, recevons toujours beaucoup plus des plantes que
 Tous les êtres vivants terrestres respirent dans l'atmosphère à laquelle ils appartiennent, dans laquelle ils sont enracinés et qu'ils doivent partager pour subsister.\n
 Tout se ralentit au rythme de leur croissance.\n
 `;
-  let sentences = string
-    .split(/\n/)
-    .filter((sentence) => sentence.trim().length > 0);
 
-  console.log(sentences[0]);
-  sentences.forEach((sentence) => {
-    let counter = 0;
-    // create p with jquery
-    const $p = $("<p></p>");
-    const intervalId = setInterval(() => {
-      $p.append(sentence[counter]);
-      $main.append($p);
-      counter++;
-      if (counter === sentence.length) {
-        clearInterval(intervalId);
-      }
-    }, 100);
-  });
+  let counter = 0;
+  let subCounter = 0;
+  const intervalId = setInterval(() => {
+    $p.append(string[counter]);
+    if (subCounter > 80 && string[counter] === " ") {
+      $p.append("<br>");
+      subCounter = 0;
+    }
+    if (string[counter] === "\n") {
+      subCounter = 0;
+      $p.text("");
+    }
+    subCounter++;
+    counter++;
+    if (counter === string.length) {
+      counter = 0;
+      subCounter = 0;
+    }
+  }, 200);
 });
