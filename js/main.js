@@ -35,5 +35,5 @@ Tout se ralentit au rythme de leur croissance...                 \n
       counter = 0;
       subCounter = 0;
     }
-  }, 200);
+  }, 150);
 });
