@@ -9,13 +9,15 @@ html {
   width: 100vw;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
-  background-color: transparent;
+  background: #0f0;
 }
 
 #p {
   text-wrap: wrap;
   word-wrap: normal;
   line-height: 1.5;
+  color: #fff;
+  background: #0f0;
 }
 
 main {
