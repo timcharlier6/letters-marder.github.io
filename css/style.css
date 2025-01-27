@@ -7,15 +7,14 @@
 @media screen and (orientation: landscape) {
   html {
     font-family: "Roboto", sans-serif;
-    background: #4EAA22;
-    background: linear-gradient(135deg, #4EAA22, #1F7504);
+    background: #4eaa22;
   }
-  
+
   body {
     min-width: 100vw;
     min-height: 100vh;
   }
-  
+
   #p {
     text-wrap: wrap;
     word-wrap: normal;
@@ -23,5 +22,4 @@
     color: #eee;
     background-color: transparent;
   }
-  
 }
