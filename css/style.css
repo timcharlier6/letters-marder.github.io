@@ -4,29 +4,24 @@
   padding: 0;
 }
 
-html {
-  font-family: "Roboto", sans-serif;
-  background: #4EAA22;
-  background: linear-gradient(135deg, #4EAA22, #1F7504);
-}
-
-body {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-#p {
-  text-wrap: wrap;
-  word-wrap: normal;
-  line-height: 1.5;
-  color: #eee;
-}
-
-main {
-  margin: 40vh 10vw;
-}
-
-main,
-p {
-  background-color: transparent;
+@media screen and (orientation: landscape) {
+  html {
+    font-family: "Roboto", sans-serif;
+    background: #4EAA22;
+    background: linear-gradient(135deg, #4EAA22, #1F7504);
+  }
+  
+  body {
+    min-width: 100vw;
+    min-height: 100vh;
+  }
+  
+  #p {
+    text-wrap: wrap;
+    word-wrap: normal;
+    line-height: 1.5;
+    color: #eee;
+    background-color: transparent;
+  }
+  
 }
