@@ -9,15 +9,15 @@ html {
   width: 100vw;
   overflow: hidden;
   font-family: "Roboto", sans-serif;
-  background: #0f0;
+  background: #4EAA22;
+  background: linear-gradient(135deg, #4EAA22, #1F7504);
 }
 
 #p {
   text-wrap: wrap;
   word-wrap: normal;
   line-height: 1.5;
-  color: #fff;
-  background: #0f0;
+  color: #eee;
 }
 
 main {
