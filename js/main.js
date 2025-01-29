@@ -13,17 +13,19 @@ Libérant du pollen, a la merci du vent ou des insectes, elles se jettent dehors
 Lorsque je m'attarde avec les plantes, je me retrouve en communion avec tout ce qu'elles sont et vivent, et je deviens moi-même autrement.                 \n
 Nous pouvons illustrer esthétiquement l’héritage végétal en nous, le sens fugace de notre propre végétation.                 \n
 Nous, ainsi que tout ce qui vit, recevons toujours beaucoup plus des plantes que nous ne leur rendons, car les plantes respirent pour tous les animaux et les êtres humains sans exception.                 \n
-Tout se ralentit au rythme de leur croissance...                 \n
+Tout se ralentit au rythme de leur croissance...  \n
 `;
 
   let counter = 0;
   let subCounter = 0;
   const intervalId = setInterval(() => {
     $p.append(string[counter]);
+    /*
     if (subCounter > 80 && string[counter] === " ") {
       $p.append("<br>");
       subCounter = 0;
     }
+    */
     if (string[counter] === "\n") {
       subCounter = 0;
       $p.text("");

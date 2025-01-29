@@ -4,22 +4,23 @@
   padding: 0;
 }
 
-@media screen and (orientation: landscape) {
-  html {
-    font-family: "Roboto", sans-serif;
-    background: #4eaa22;
-  }
+html {
+  font-family: "Roboto", sans-serif;
+}
 
-  body {
-    min-width: 100vw;
-    min-height: 100vh;
-  }
+body {
+  background-image: url("./../img/400x711.gif");
+  min-width: 100vw;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-  #p {
-    text-wrap: wrap;
-    word-wrap: normal;
-    line-height: 1.5;
-    color: #eee;
-    background-color: transparent;
-  }
+#p {
+  text-wrap: wrap;
+  word-wrap: break-word;
+  line-height: 1.5;
+  color: #333;
+  background-color: transparent;
+  text-shadow: 2px 2px 5px white;
 }
