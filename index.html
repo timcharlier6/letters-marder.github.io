@@ -37,6 +37,14 @@
     animation: blink 1s steps(1) infinite;
   }
   .caret[hidden] { display: none; }
+
+  #toggle {
+    position: fixed; right: 16px; bottom: 16px; z-index: 10;
+    font: 16px "Courier New", Courier, monospace;
+    background: #fff; color: #000; border: 1px solid #000;
+    padding: 8px 18px; cursor: pointer;
+  }
+  #toggle:hover { background: #000; color: #fff; }
   @keyframes blink { 50% { opacity: 0; } }
 </style>
 </head>
@@ -45,6 +53,8 @@
   <div class="pane" id="a"><div class="txt"></div></div>
   <div class="pane" id="b"><div class="txt"></div></div>
 </div>
+
+<button id="toggle" type="button">Start</button>
 
 <script>
 /* ---------- settings ---------- */
@@ -90,6 +100,9 @@ M.className = 'txt measure';
 A.el.appendChild(M);
 
 let text = '', gen = 0, aStart = 0;
+let started = false, paused = true, resumeFn = null;
+const btn = document.getElementById('toggle');
+const label = () => btn.textContent = !started ? 'Start' : paused ? 'Resume' : 'Pause';
 
 /* ---------- pagination ---------- */
 const WS = /\s/;
@@ -120,6 +133,7 @@ function type(p, str, my) {
     let i = 0; p.node.data = ''; p.rest.data = str; p.caret.hidden = false; place(p);
     (function step() {
       if (my !== gen) return res();
+      if (paused) { resumeFn = step; return; }   // wait until resumed
       if (i >= str.length) { p.caret.hidden = true; return res(); }
       const cps = SPEEDS[level];
       let n = 1, w = 1000 / cps;
@@ -174,6 +188,7 @@ async function play(from, instant) {
     if (my !== gen) return;
     aStart = nx.s;
   }
+  if (my === gen) { started = false; paused = true; resumeFn = null; label(); }
 }
 
 /* ---------- events ---------- */
@@ -184,10 +199,22 @@ addEventListener('keydown', e => {
   e.preventDefault();
 });
 
+function toggle() {
+  if (!text) return;
+  if (!started) { started = true; paused = false; label(); play(0, false); return; }
+  paused = !paused;
+  label();
+  if (!paused && resumeFn) { const f = resumeFn; resumeFn = null; f(); }
+}
+btn.addEventListener('click', () => { toggle(); btn.blur(); });
+addEventListener('keydown', e => {
+  if (e.key === ' ') { e.preventDefault(); if (!e.repeat) toggle(); }
+});
+
 let rt;
 addEventListener('resize', () => {
   clearTimeout(rt);
-  rt = setTimeout(() => { if (text) play(aStart, true); }, 250);
+  rt = setTimeout(() => { if (text && started) play(aStart, true); }, 250);
 });
 
 /* ---------- start ---------- */
@@ -195,7 +222,7 @@ fetch(FILE)
   .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
   .then(t => {
     if (/^\s*<(!doctype|html)/i.test(t) && !/\.html?$/i.test(FILE)) throw new Error('html');
-    text = t.replace(/\r\n?/g, '\n'); play(0, false);
+    text = t.replace(/\r\n?/g, '\n');
   })
   .catch(() => {
     A.node.data = 'Could not load "' + FILE + '".\nThe server returned a page instead of the text file, or the file could not be read. Check the path (open it directly in the browser), or serve over http rather than file://.';
